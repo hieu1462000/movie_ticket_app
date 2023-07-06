@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_ticket/model_views/booking_service.dart';
 import 'package:movie_ticket/views/widgets/share_widgets/booking_bottom_bar.dart';
-import 'package:movie_ticket/views/widgets/share_widgets/drawer.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:intl/intl.dart';
@@ -113,7 +112,7 @@ class _BookingSeatScreenState extends State<BookingSeatScreen> {
     return showtimeDetail != null
         ? Scaffold(
             backgroundColor: Colors.black,
-            endDrawer: DrawerWidget(),
+            //endDrawer: DrawerWidget(),
             bottomNavigationBar: BookingBottomBar(
               movieTitle: showtimeDetail.movieReference.title,
               movieRated: showtimeDetail.movieReference.ratedReference.symbol,

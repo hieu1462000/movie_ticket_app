@@ -77,6 +77,34 @@ class _MyTicketScreenState extends State<MyTicketScreen> {
                 isCenter: false,
                 expandedHeight: 0,
               ),
+              SliverFillRemaining(
+                hasScrollBody: false,
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        height: 40.w,
+                        width: 45.w,
+                        decoration: const BoxDecoration(
+                          image: DecorationImage(
+                              image:
+                                  AssetImage('assets/images/onlypopcorn.png'),
+                              fit: BoxFit.fill),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 2.h),
+                        child: const Text(
+                          "There is no data",
+                          style: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ]));
   }
 }

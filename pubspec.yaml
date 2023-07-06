@@ -81,6 +81,8 @@ flutter:
     - assets/images/netflix.png
     - assets/images/cgv.png
     - assets/icons/ticket.svg
+    - assets/images/popcorn.png
+    - assets/images/onlypopcorn.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
               '/snack': (context) => const SnackScreen(),
               '/ad': (context) => const DetailAdvertisementScreen(),
               '/payment': (context) => const PaymentScreen(),
-              '/ticket': (context) => MyTicketScreen()
+              '/ticket': (context) => const MyTicketScreen()
             },
           ));
     });

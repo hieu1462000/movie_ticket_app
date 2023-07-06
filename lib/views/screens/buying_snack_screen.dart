@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_ticket/model_views/booking_service.dart';
 import 'package:movie_ticket/models/selected_snacks_model.dart';
-import 'package:movie_ticket/views/widgets/share_widgets/drawer.dart';
 import 'package:movie_ticket/views/widgets/share_widgets/snack_card.dart';
 import 'package:sizer/sizer.dart';
 import 'package:provider/provider.dart';
@@ -55,7 +54,7 @@ class _SnackScreenState extends State<SnackScreen> {
     return listSnack.isNotEmpty
         ? Scaffold(
             backgroundColor: Colors.black,
-            endDrawer: DrawerWidget(),
+            //endDrawer: DrawerWidget(),
             bottomNavigationBar: BookingBottomBar(
               movieTitle: showtimeDetail!.movieReference.title,
               movieRated: showtimeDetail.movieReference.ratedReference.symbol,

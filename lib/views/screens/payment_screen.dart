@@ -92,15 +92,44 @@ class _PaymentScreenState extends State<PaymentScreen> {
     Navigator.of(context).pop();
     if (bookingService.isSendingSuccessful == true) {
       print("Sending success");
-      const CupertinoAlertDialog(
-        title: Text("Success"),
-        content: Text("Booked successfully"),
-      );
+      showDialog(
+          barrierDismissible: false,
+          context: context,
+          builder: (context) {
+            return Center(
+              child: CupertinoAlertDialog(
+                title: const Text("Success"),
+                actions: [
+                  CupertinoDialogAction(
+                      onPressed: () {
+                        bookingService.ticketPrice = 0;
+                        bookingService.bookingPrice = 0;
+                        bookingService.numberOfSeats = 0;
+                        bookingService.selectedSeats = [];
+                        bookingService.selectedSeatsIndex = [];
+                        bookingService.selectedSnacks = "";
+                        bookingService.listSelectedSnacks = [];
+                        Navigator.popUntil(context, ModalRoute.withName('/'));
+                      },
+                      child: const Text("Home")),
+                  CupertinoDialogAction(
+                      onPressed: () {
+                        bookingService.ticketPrice = 0;
+                        bookingService.bookingPrice = 0;
+                        bookingService.numberOfSeats = 0;
+                        bookingService.selectedSeats = [];
+                        bookingService.selectedSeatsIndex = [];
+                        bookingService.selectedSnacks = "";
+                        bookingService.listSelectedSnacks = [];
+                        Navigator.of(context).pushNamed('/ticket');
+                      },
+                      child: const Text("My ticket")),
+                ],
+                content: const Text("Booked successfully"),
+              ),
+            );
+          });
       await bookingService.getListTicketFromApi(user.uid);
-      await Future.delayed(const Duration(milliseconds: 500));
-      if (!mounted) return;
-      Navigator.of(context).pop();
-      Navigator.of(context).pushNamed('/ticket');
     }
   }
 
