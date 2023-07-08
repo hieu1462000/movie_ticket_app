@@ -8,7 +8,8 @@ class TicketModel {
   String showtime;
   int runtime;
   String theater;
-  List<int> seat;
+  List<int> seatIndex;
+  List<String> seat;
   String? snack;
   int totalPrice;
   int ticketPrice;
@@ -25,6 +26,7 @@ class TicketModel {
       required this.showtime,
       required this.runtime,
       required this.theater,
+      required this.seatIndex,
       required this.seat,
       required this.snack,
       required this.totalPrice,
@@ -43,7 +45,8 @@ class TicketModel {
         showtime: json['showtime'],
         runtime: json['runtime'],
         theater: json['theater'],
-        seat: json['seat'].cast<int>(),
+        seatIndex: json['seatIndex'].cast<int>(),
+        seat: json['seat'].cast<String>(),
         snack: json['snack'] ?? "",
         totalPrice: json['totalPrice'],
         ticketPrice: json['ticketPrice'],
@@ -61,6 +64,7 @@ class TicketModel {
     data['showtime'] = showtime;
     data['runtime'] = runtime;
     data['theater'] = theater;
+    data['seatIndex'] = seat.toList();
     data['seat'] = seat.toList();
     data['snack'] = snack;
     data['totalPrice'] = totalPrice;
