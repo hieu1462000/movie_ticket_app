@@ -8,6 +8,7 @@ import 'package:movie_ticket/views/screens/booking_seat_screen.dart';
 import 'package:movie_ticket/views/screens/buying_snack_screen.dart';
 import 'package:movie_ticket/views/screens/detail_advertisement_screen.dart';
 import 'package:movie_ticket/views/screens/detail_movie_screen.dart';
+import 'package:movie_ticket/views/screens/detail_my_ticket_screen.dart';
 import 'package:movie_ticket/views/screens/my_ticket_screen.dart';
 import 'package:movie_ticket/views/screens/payment_screen.dart';
 import 'package:movie_ticket/views/screens/showtime_screen.dart';
@@ -47,7 +48,8 @@ class MyApp extends StatelessWidget {
               '/snack': (context) => const SnackScreen(),
               '/ad': (context) => const DetailAdvertisementScreen(),
               '/payment': (context) => const PaymentScreen(),
-              '/ticket': (context) => const MyTicketScreen()
+              '/ticket': (context) => const MyTicketScreen(),
+              '/detailTicket': (context) => const DetailTicketScreen()
             },
           ));
     });

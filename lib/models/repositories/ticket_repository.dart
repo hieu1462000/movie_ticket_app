@@ -19,7 +19,6 @@ class TicketRepository {
     if (response.statusCode == 200) {
       return true;
     } else {
-      print(response.statusCode);
       print(response.body);
       throw Exception('something wrong');
     }
@@ -31,6 +30,17 @@ class TicketRepository {
       var data = json.decode(response.body);
       return data.map<TicketModel>((e) => TicketModel.fromJson(e)).toList();
     } else {
+      throw Exception('something wrong');
+    }
+  }
+
+  Future getDetailTicket(ticketId) async {
+    var response = await http.get(Uri.parse("$baseUrl/tickets/$ticketId"));
+    if (response.statusCode == 200) {
+      var data = json.decode(response.body);
+      return TicketModel.fromJson(data);
+    } else {
+      print(response.body);
       throw Exception('something wrong');
     }
   }

@@ -93,4 +93,11 @@ class BookingService extends ChangeNotifier {
     listTicket = tickets;
     notifyListeners();
   }
+
+  TicketModel? ticketDetail;
+  Future<void> getDetailTicketFromApi(String? ticketId) async {
+    final ticket = await ticketRepository.getDetailTicket(ticketId);
+    ticketDetail = ticket;
+    notifyListeners();
+  }
 }
