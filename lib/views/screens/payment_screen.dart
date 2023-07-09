@@ -53,7 +53,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
     String theater,
     List<int> seatIndex,
     List<String> seat,
-    String? snack,
+    String snack,
     int totalPrice,
     int ticketPrice,
     int snackPrice,
@@ -78,6 +78,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
     BookingService bookingService =
         Provider.of<BookingService>(context, listen: false);
     bookingService.isSendingSuccessful = false;
+    print(seatIndex[0]);
     showDialog(
         barrierDismissible: false,
         context: context,

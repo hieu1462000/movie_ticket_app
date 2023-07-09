@@ -58,111 +58,137 @@ class MyTicketInformation extends StatelessWidget {
                 image: DecorationImage(
                     image: NetworkImage(imagePath), fit: BoxFit.fill)),
           ),
-          Padding(
-            padding: EdgeInsets.only(right: 2.w),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
+          SizedBox(
+            width: 62.w,
+            child: Padding(
+              padding: EdgeInsets.only(left: 2.w),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                      padding: EdgeInsets.only(bottom: 1.h),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            SizedBox(
+                              width: 60.w,
+                              child: Padding(
+                                padding: EdgeInsets.only(right: 1.w),
+                                child: Text(
+                                  movieTitle,
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
+                                  style: TextStyle(
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ),
+                          ])),
+                  Padding(
                     padding: EdgeInsets.only(bottom: 1.h),
                     child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          SizedBox(
-                            width: 60.w,
-                            child: Padding(
-                              padding: EdgeInsets.only(right: 1.w),
-                              child: Text(
-                                movieTitle,
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 1,
-                                style: TextStyle(
-                                    //fontSize: 14.sp,
-                                    fontWeight: FontWeight.bold),
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(right: 1.w),
+                                child: Text(
+                                  date,
+                                  style: TextStyle(
+                                      fontSize: 10.sp,
+                                      fontStyle: FontStyle.italic),
+                                ),
                               ),
-                            ),
+                              SizedBox(
+                                  height: 4.h,
+                                  child: const VerticalDivider(
+                                    color: Colors.black,
+                                  ))
+                            ],
                           ),
-                        ])),
-                Padding(
-                  padding: EdgeInsets.only(bottom: 1.h),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(right: 3.w),
-                              child: Text(
-                                date,
-                                style: TextStyle(fontStyle: FontStyle.italic),
-                              ),
-                            ),
-                            SizedBox(
-                                height: 5.h,
-                                child: const VerticalDivider(
-                                  color: Colors.grey,
-                                ))
-                          ],
                         ),
-                      ),
-                      Text(
-                        "$time ~ ${estimateEndingTime(time, runtime)}",
-                        style: TextStyle(fontStyle: FontStyle.italic),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(bottom: 1.h),
-                  child: Row(
-                    children: [
-                      const Icon(Icons.movie),
-                      Padding(
-                        padding: EdgeInsets.only(left: 1.w),
-                        child: Text(
-                          cinema,
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                        Text(
+                          "$time ~ ${estimateEndingTime(time, runtime)}",
+                          style: TextStyle(
+                              fontSize: 10.sp, fontStyle: FontStyle.italic),
                         ),
-                      )
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(bottom: 1.h),
-                  child: Row(
-                    children: [
-                      const Icon(Icons.chair),
-                      Padding(
-                        padding: EdgeInsets.only(left: 1.w),
-                        child: Text(
-                          seatList.join(', '),
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                if (snack.isNotEmpty)
                   Padding(
                     padding: EdgeInsets.only(bottom: 1.h),
                     child: Row(
                       children: [
-                        const Icon(Icons.fastfood),
+                        Icon(
+                          Icons.movie,
+                          size: 13.sp,
+                        ),
                         Padding(
                           padding: EdgeInsets.only(left: 1.w),
                           child: Text(
-                            snack,
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            cinema,
+                            style: TextStyle(
+                                fontSize: 10.sp, fontWeight: FontWeight.bold),
                           ),
                         )
                       ],
                     ),
-                  )
-              ],
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 1.h),
+                    child: Row(
+                      children: [
+                        Icon(Icons.chair, size: 13.sp),
+                        SizedBox(
+                          width: 55.w,
+                          child: Padding(
+                            padding: EdgeInsets.only(left: 1.w),
+                            child: Text(
+                              seatList.join(', '),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                  fontSize: 10.sp, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  if (snack.isNotEmpty)
+                    Padding(
+                      padding: EdgeInsets.only(bottom: 1.h),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Icon(
+                            Icons.fastfood,
+                            size: 13.sp,
+                          ),
+                          SizedBox(
+                            width: 55.w,
+                            child: Padding(
+                              padding: EdgeInsets.only(left: 1.w),
+                              child: Text(
+                                snack,
+                                maxLines: 3,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    fontSize: 10.sp,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+                ],
+              ),
             ),
           )
         ],

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:movie_ticket/views/widgets/detail_my_ticket_background.dart';
+import 'package:movie_ticket/views/widgets/detail_my_ticket_information.dart';
+import 'package:movie_ticket/views/widgets/detail_my_ticket_price.dart';
 import 'package:sizer/sizer.dart';
 import 'package:provider/provider.dart';
 
@@ -38,6 +41,50 @@ class _DetailTicketScreenState extends State<DetailTicketScreen> {
                   isCenter: false,
                   expandedHeight: 0,
                 ),
+                SliverToBoxAdapter(
+                  child: DetailTicketBackground(
+                      content: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      MyTicketInformation(
+                          imagePath: ticket.posterPath,
+                          movieTitle: ticket.movieTitle,
+                          date: ticket.date,
+                          time: ticket.showtime,
+                          runtime: ticket.runtime,
+                          cinema: ticket.theater,
+                          seatList: ticket.seat,
+                          snack: ticket.snack),
+                      SizedBox(height: 5.h),
+                      MyTicketPrice(
+                          ticketPrice: ticket.ticketPrice,
+                          concession: ticket.snackPrice,
+                          paymentMethod: ticket.paymentMethod,
+                          total: ticket.totalPrice),
+                      //SizedBox(height: 5.h),
+                      //QR code
+                      Container(
+                        alignment: Alignment.center,
+                        height: 40.w,
+                        width: 40.w,
+                        decoration: BoxDecoration(
+                            border: Border.all(color: Colors.black)),
+                        child: const Text(
+                          "QR code is here!",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 1.h),
+                        child: Text(
+                          ticket.id!,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 10.sp),
+                        ),
+                      )
+                    ],
+                  )),
+                )
               ],
             ),
           )

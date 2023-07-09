@@ -10,7 +10,7 @@ class TicketModel {
   String theater;
   List<int> seatIndex;
   List<String> seat;
-  String? snack;
+  String snack;
   int totalPrice;
   int ticketPrice;
   int snackPrice;
@@ -64,7 +64,7 @@ class TicketModel {
     data['showtime'] = showtime;
     data['runtime'] = runtime;
     data['theater'] = theater;
-    data['seatIndex'] = seat.toList();
+    data['seatIndex'] = seatIndex.toList();
     data['seat'] = seat.toList();
     data['snack'] = snack;
     data['totalPrice'] = totalPrice;

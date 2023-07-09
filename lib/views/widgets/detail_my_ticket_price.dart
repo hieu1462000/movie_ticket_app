@@ -26,10 +26,16 @@ class MyTicketPrice extends StatelessWidget {
             padding: EdgeInsets.only(bottom: 2.h),
             child: Row(
               children: [
-                const Expanded(child: Text("Ticket Price:")),
-                Text(NumberFormat.simpleCurrency(
-                        locale: 'vi-VN', decimalDigits: 0)
-                    .format(ticketPrice))
+                Expanded(
+                    child: Text("Ticket Price:",
+                        style: TextStyle(
+                            fontSize: 12.sp, fontWeight: FontWeight.bold))),
+                Text(
+                    NumberFormat.simpleCurrency(
+                            locale: 'vi-VN', decimalDigits: 0)
+                        .format(ticketPrice),
+                    style:
+                        TextStyle(fontSize: 12.sp, fontWeight: FontWeight.bold))
               ],
             ),
           ),
@@ -37,10 +43,16 @@ class MyTicketPrice extends StatelessWidget {
             padding: EdgeInsets.only(bottom: 2.h),
             child: Row(
               children: [
-                const Expanded(child: Text("Concession:")),
-                Text(NumberFormat.simpleCurrency(
-                        locale: 'vi-VN', decimalDigits: 0)
-                    .format(concession))
+                Expanded(
+                    child: Text("Concession:",
+                        style: TextStyle(
+                            fontSize: 12.sp, fontWeight: FontWeight.bold))),
+                Text(
+                    NumberFormat.simpleCurrency(
+                            locale: 'vi-VN', decimalDigits: 0)
+                        .format(concession),
+                    style:
+                        TextStyle(fontSize: 12.sp, fontWeight: FontWeight.bold))
               ],
             ),
           ),
@@ -48,8 +60,13 @@ class MyTicketPrice extends StatelessWidget {
             padding: EdgeInsets.only(bottom: 1.h),
             child: Row(
               children: [
-                const Expanded(child: Text("Payment Method")),
-                Text(paymentMethod)
+                Expanded(
+                    child: Text("Payment Method:",
+                        style: TextStyle(
+                            fontSize: 12.sp, fontWeight: FontWeight.bold))),
+                Text(paymentMethod,
+                    style:
+                        TextStyle(fontSize: 12.sp, fontWeight: FontWeight.bold))
               ],
             ),
           ),
@@ -63,10 +80,16 @@ class MyTicketPrice extends StatelessWidget {
             padding: EdgeInsets.only(bottom: 2.h),
             child: Row(
               children: [
-                const Expanded(child: Text("Total:")),
-                Text(NumberFormat.simpleCurrency(
-                        locale: 'vi-VN', decimalDigits: 0)
-                    .format(total))
+                Expanded(
+                    child: Text("Total:",
+                        style: TextStyle(
+                            fontSize: 12.sp, fontWeight: FontWeight.bold))),
+                Text(
+                    NumberFormat.simpleCurrency(
+                            locale: 'vi-VN', decimalDigits: 0)
+                        .format(total),
+                    style:
+                        TextStyle(fontSize: 12.sp, fontWeight: FontWeight.bold))
               ],
             ),
           ),
