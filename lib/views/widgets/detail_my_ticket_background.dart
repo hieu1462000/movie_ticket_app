@@ -2,20 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 class DetailTicketBackground extends StatelessWidget {
-  final double margin;
-  final double borderRadius;
-  final double clipRadius;
-  final double smallClipRadius;
-  final int numberOfSmallClips;
   final Widget content;
-  const DetailTicketBackground(
-      {super.key,
-      this.margin = 20,
-      this.borderRadius = 10,
-      this.clipRadius = 12.5,
-      this.smallClipRadius = 5,
-      this.numberOfSmallClips = 13,
-      required this.content});
+  const DetailTicketBackground({super.key, required this.content});
 
   @override
   Widget build(BuildContext context) {
@@ -26,23 +14,17 @@ class DetailTicketBackground extends StatelessWidget {
       child: SizedBox(
         width: ticketWidth,
         height: ticketHeight,
-        // decoration: BoxDecoration(
-        //   boxShadow: [
-        //     BoxShadow(
-        //       offset: Offset(0, 8),
-        //       color: Colors.black.withOpacity(0.1),
-        //       blurRadius: 37,
-        //       spreadRadius: 0,
-        //     ),
-        //   ],
-        // ),
         child: ClipPath(
           clipper: TicketClipper(
-            borderRadius: borderRadius,
-            clipRadius: clipRadius,
-            smallClipRadius: smallClipRadius,
-            numberOfSmallClips: numberOfSmallClips,
-          ),
+              smallCircleClipPadding: 5.w,
+              borderRadius: 10,
+              bigCircleClipRadius: 4.w,
+              smallCircleClipRadius: 1.5.w,
+              numberOfSmallCircleClips: 13,
+              numberOfRecClips: 4,
+              recClipPadding: 9.w,
+              recClipHeight: 3.w,
+              recClipWidth: 14.w),
           child: Container(
             color: Colors.white.withOpacity(0.8),
             child: content,
@@ -54,25 +36,33 @@ class DetailTicketBackground extends StatelessWidget {
 }
 
 class TicketClipper extends CustomClipper<Path> {
-  static const double clipPadding = 18;
-
+  final double smallCircleClipPadding;
   final double borderRadius;
-  final double clipRadius;
-  final double smallClipRadius;
-  final int numberOfSmallClips;
+  final double bigCircleClipRadius;
+  final double smallCircleClipRadius;
+  final int numberOfSmallCircleClips;
 
-  const TicketClipper({
-    required this.borderRadius,
-    required this.clipRadius,
-    required this.smallClipRadius,
-    required this.numberOfSmallClips,
-  });
+  final int numberOfRecClips;
+  final double recClipPadding;
+  final double recClipHeight;
+  final double recClipWidth;
+
+  const TicketClipper(
+      {required this.smallCircleClipPadding,
+      required this.borderRadius,
+      required this.bigCircleClipRadius,
+      required this.smallCircleClipRadius,
+      required this.numberOfSmallCircleClips,
+      required this.numberOfRecClips,
+      required this.recClipPadding,
+      required this.recClipHeight,
+      required this.recClipWidth});
 
   @override
   Path getClip(Size size) {
     var path = Path();
 
-    final clipCenterY = size.height * 0.3 + clipRadius;
+    final clipCenterY = size.height * 0.3 + bigCircleClipRadius;
 
     // draw rect
     path.addRRect(RRect.fromRectAndRadius(
@@ -85,25 +75,29 @@ class TicketClipper extends CustomClipper<Path> {
     // circle on the left
     clipPath.addOval(Rect.fromCircle(
       center: Offset(0, clipCenterY),
-      radius: clipRadius,
+      radius: bigCircleClipRadius,
     ));
 
     // circle on the right
     clipPath.addOval(Rect.fromCircle(
       center: Offset(size.width, clipCenterY),
-      radius: clipRadius,
+      radius: bigCircleClipRadius,
     ));
 
-    // draw small clip circles
-    final clipContainerSize = size.width - clipRadius * 2 - clipPadding * 2;
-    final smallClipSize = smallClipRadius * 2;
-    final smallClipBoxSize = clipContainerSize / numberOfSmallClips;
-    final smallClipPadding = (smallClipBoxSize - smallClipSize) / 2;
-    final smallClipStart = clipRadius + clipPadding;
+    // draw small clip circles, each small circle clip inside one clipbox
+    final smallClipContainerSize =
+        size.width - bigCircleClipRadius * 2 - smallCircleClipPadding * 2;
+    final smallClipSize = smallCircleClipRadius * 2;
+    final smallClipBoxSize = smallClipContainerSize / numberOfSmallCircleClips;
+    final smallClipBoxPadding =
+        (smallClipBoxSize - smallClipSize) / 2; // small circle inside clipbox
+    final smallClipBoxStart = bigCircleClipRadius +
+        smallCircleClipPadding; // space between first circle and first clipbox that contain small circle
 
-    final smallClipCenterOffsets = List.generate(numberOfSmallClips, (index) {
-      final boxX = smallClipStart + smallClipBoxSize * index;
-      final centerX = boxX + smallClipPadding + smallClipRadius;
+    final smallClipCenterOffsets =
+        List.generate(numberOfSmallCircleClips, (index) {
+      final boxX = smallClipBoxStart + smallClipBoxSize * index;
+      final centerX = boxX + smallClipBoxPadding + smallCircleClipRadius;
 
       return Offset(centerX, clipCenterY);
     });
@@ -111,7 +105,47 @@ class TicketClipper extends CustomClipper<Path> {
     smallClipCenterOffsets.forEach((centerOffset) {
       clipPath.addOval(Rect.fromCircle(
         center: centerOffset,
-        radius: smallClipRadius,
+        radius: smallCircleClipRadius,
+      ));
+    });
+
+    // draw clip rec
+    final recClipContainerSize =
+        size.width - 2 * recClipPadding; //size of box container all clips
+    final recClipBoxSize = recClipContainerSize /
+        numberOfRecClips; //size of each clipbox that contain one rec clip
+    final recClipBoxPadding = (recClipBoxSize - recClipWidth) / 2;
+
+    // Rectangle clip
+    final smallClipTopOffsets = List.generate(numberOfRecClips, (index) {
+      final boxX = recClipPadding + recClipBoxSize * index;
+      final centerX = boxX + recClipBoxPadding + recClipWidth / 2;
+
+      return Offset(centerX, 0);
+    });
+
+    smallClipTopOffsets.forEach((centerOffset) {
+      // clipPath.addRect(Rect.fromCenter(
+      //     center: centerOffset, width: recClipWidth, height: recClipHeight)); //without radius
+      clipPath.addRRect(RRect.fromRectAndRadius(
+        Rect.fromCenter(
+            center: centerOffset, width: recClipWidth, height: recClipHeight),
+        Radius.circular(7), //with radius
+      ));
+    });
+
+    final smallClipBottomOffsets = List.generate(numberOfRecClips, (index) {
+      final boxX = recClipPadding + recClipBoxSize * index;
+      final centerX = boxX + recClipBoxPadding + recClipWidth / 2;
+
+      return Offset(centerX, size.height);
+    });
+
+    smallClipBottomOffsets.forEach((centerOffset) {
+      clipPath.addRRect(RRect.fromRectAndRadius(
+        Rect.fromCenter(
+            center: centerOffset, width: recClipWidth, height: recClipHeight),
+        Radius.circular(7),
       ));
     });
 
@@ -126,9 +160,14 @@ class TicketClipper extends CustomClipper<Path> {
   }
 
   @override
-  bool shouldReclip(TicketClipper old) =>
-      old.borderRadius != borderRadius ||
-      old.clipRadius != clipRadius ||
-      old.smallClipRadius != smallClipRadius ||
-      old.numberOfSmallClips != numberOfSmallClips;
+  bool shouldReclip(TicketClipper oldClipper) =>
+      oldClipper.smallCircleClipPadding != smallCircleClipPadding ||
+      oldClipper.borderRadius != borderRadius ||
+      oldClipper.bigCircleClipRadius != bigCircleClipRadius ||
+      oldClipper.smallCircleClipRadius != smallCircleClipRadius ||
+      oldClipper.numberOfSmallCircleClips != numberOfSmallCircleClips ||
+      oldClipper.numberOfRecClips != numberOfRecClips ||
+      oldClipper.recClipPadding != recClipPadding ||
+      oldClipper.recClipHeight != recClipHeight ||
+      oldClipper.recClipWidth != recClipWidth;
 }

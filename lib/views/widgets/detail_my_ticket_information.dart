@@ -47,7 +47,7 @@ class MyTicketInformation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 4.w, horizontal: 2.w),
+      padding: EdgeInsets.only(left: 2.w, right: 2.w, top: 4.w, bottom: 2.w),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -176,7 +176,7 @@ class MyTicketInformation extends StatelessWidget {
                               padding: EdgeInsets.only(left: 1.w),
                               child: Text(
                                 snack,
-                                maxLines: 3,
+                                //maxLines: 3,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                     fontSize: 10.sp,

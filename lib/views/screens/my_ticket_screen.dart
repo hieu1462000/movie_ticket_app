@@ -41,9 +41,9 @@ class _MyTicketScreenState extends State<MyTicketScreen> {
                   expandedHeight: 0,
                 ),
                 SliverPadding(
-                    padding: EdgeInsets.all(3.w),
+                    padding: EdgeInsets.zero,
                     sliver: SliverFixedExtentList(
-                        itemExtent: 35.w,
+                        itemExtent: 16.h,
                         delegate: SliverChildBuilderDelegate(
                             (context, index) => MyTicketCard(
                                 onTap: () async {
