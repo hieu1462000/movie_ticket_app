@@ -1,5 +1,9 @@
 # BOOKING MOVIE TICKET APP ( FLUTTER MVVM + PROVIDER Architecture)
 
+## Server
+
+https://github.com/hieu1462000/movie_ticket_server
+
 ## Screen
 
 This is some screens of application.
