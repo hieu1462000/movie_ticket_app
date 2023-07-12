@@ -66,7 +66,7 @@ class _SnackScreenState extends State<SnackScreen> {
                 Navigator.of(context).pushNamed('/payment');
               },
             ),
-            body: CustomScrollView(slivers: [
+            body: CustomScrollView(physics: BouncingScrollPhysics(), slivers: [
               AppBarWidget(
                 leadingWidget: Icon(
                   Icons.adaptive.arrow_back,

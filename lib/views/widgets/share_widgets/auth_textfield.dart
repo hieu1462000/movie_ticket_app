@@ -23,29 +23,40 @@ class AuthTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 7.w),
-      child: TextFormField(
-          controller: controller,
-          style: const TextStyle(color: Colors.white),
-          decoration: InputDecoration(
-            contentPadding: EdgeInsets.symmetric(
-              horizontal: 6.w,
+      child: Container(
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.white10,
+              blurRadius: 25,
+              offset: const Offset(0, 1),
             ),
-            enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.grey.shade800),
-                borderRadius: BorderRadius.circular(10)),
-            focusedBorder: OutlineInputBorder(
-              borderSide: const BorderSide(color: Colors.white),
-              borderRadius: BorderRadius.circular(10),
+          ],
+        ),
+        child: TextFormField(
+            controller: controller,
+            style: const TextStyle(color: Colors.white),
+            decoration: InputDecoration(
+              contentPadding: EdgeInsets.symmetric(
+                horizontal: 6.w,
+              ),
+              enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.grey.shade800),
+                  borderRadius: BorderRadius.circular(10)),
+              focusedBorder: OutlineInputBorder(
+                borderSide: const BorderSide(color: Colors.white),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              filled: true,
+              fillColor: Colors.black,
+              hintText: hintText,
+              hintStyle: TextStyle(color: Colors.grey[800]),
+              suffix: suffix,
             ),
-            filled: true,
-            fillColor: Color.fromARGB(255, 41, 13, 13),
-            hintText: hintText,
-            hintStyle: TextStyle(color: Colors.grey[800]),
-            suffix: suffix,
-          ),
-          validator: validator,
-          obscureText: obscureText,
-          onChanged: onChanged),
+            validator: validator,
+            obscureText: obscureText,
+            onChanged: onChanged),
+      ),
     );
   }
 }

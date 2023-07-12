@@ -23,6 +23,7 @@ class _MyTicketScreenState extends State<MyTicketScreen> {
             backgroundColor: Colors.black,
             endDrawer: DrawerWidget(),
             body: CustomScrollView(
+              physics: BouncingScrollPhysics(),
               slivers: [
                 AppBarWidget(
                   leadingWidget: Icon(

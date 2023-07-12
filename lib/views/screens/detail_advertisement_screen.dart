@@ -34,7 +34,7 @@ class _DetailAdvertisementScreenState extends State<DetailAdvertisementScreen> {
             backgroundColor: Colors.black,
             endDrawer: DrawerWidget(),
             body: Stack(children: [
-              CustomScrollView(slivers: [
+              CustomScrollView(physics: BouncingScrollPhysics(), slivers: [
                 AppBarWidget(
                   leadingWidget: Icon(
                     Icons.adaptive.arrow_back,

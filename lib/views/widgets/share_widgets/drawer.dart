@@ -86,6 +86,8 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                   fontWeight: FontWeight.bold,
                 )),
             onTap: () {
+              Provider.of<BookingService>(context, listen: false).isSigleMovie =
+                  false;
               movieService.selectedMovie = null;
               movieService.selectedMovieId = "";
               Navigator.of(context).pop();

@@ -38,7 +38,7 @@ class _ShowtimeScreenState extends State<ShowtimeScreen> {
     return Scaffold(
         backgroundColor: Colors.black,
         endDrawer: DrawerWidget(),
-        body: CustomScrollView(slivers: [
+        body: CustomScrollView(physics: BouncingScrollPhysics(), slivers: [
           AppBarWidget(
             leadingWidget: Icon(
               Icons.adaptive.arrow_back,
@@ -156,9 +156,7 @@ class _ShowtimeScreenState extends State<ShowtimeScreen> {
             ),
           ),
           SliverToBoxAdapter(
-              child: Provider.of<MovieService>(context)
-                      .selectedMovieId
-                      .isNotEmpty
+              child: bookingService.isSigleMovie
                   ? SingleMovieShowtime(
                       date: bookingService.selectedDate,
                       movieId:

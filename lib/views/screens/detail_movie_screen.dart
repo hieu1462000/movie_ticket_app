@@ -38,6 +38,7 @@ class _DetailMovieScreenState extends State<DetailMovieScreen> {
             endDrawer: DrawerWidget(),
             body: Stack(children: [
               CustomScrollView(
+                physics: BouncingScrollPhysics(),
                 slivers: [
                   AppBarWidget(
                     leadingWidget: Icon(
@@ -110,6 +111,7 @@ class _DetailMovieScreenState extends State<DetailMovieScreen> {
                                 const Duration(milliseconds: 200));
                             if (!mounted) return;
                             Navigator.of(context).pop();
+                            bookingService.isSigleMovie = true;
                             Navigator.of(context).pushNamed("/showtime");
                           }),
                           child: Padding(

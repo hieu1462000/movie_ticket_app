@@ -20,18 +20,31 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final user = FirebaseAuth.instance.currentUser!;
+
   @override
   void initState() {
     MovieService movieService =
         Provider.of<MovieService>(context, listen: false);
-    movieService.getListRecommendedFromApi();
     movieService.getSpecialListFromApi();
     movieService.getNowShowingListFromApi();
     movieService.getComingSoonListFromApi();
     super.initState();
   }
 
-  final user = FirebaseAuth.instance.currentUser!;
+  Future refresh() async {
+    MovieService movieService =
+        Provider.of<MovieService>(context, listen: false);
+    movieService.listRecommended = [];
+    movieService.specialList = null;
+    movieService.nowShowingList = null;
+    movieService.comingSoonList = null;
+    await Future.delayed(const Duration(milliseconds: 1000));
+    movieService.getListRecommendedFromApi();
+    movieService.getSpecialListFromApi();
+    movieService.getNowShowingListFromApi();
+    movieService.getComingSoonListFromApi();
+  }
 
   Future navigateToMyTicketScreen() async {
     BookingService bookingService =
@@ -84,7 +97,11 @@ class _HomeScreenState extends State<HomeScreen> {
             backgroundColor: Colors.black,
             endDrawer: DrawerWidget(),
             body: CustomScrollView(
+              physics: BouncingScrollPhysics(),
               slivers: [
+                CupertinoSliverRefreshControl(
+                  onRefresh: refresh,
+                ),
                 AppBarWidget(
                   leadingWidget: Icon(
                     CupertinoIcons.tickets_fill,
@@ -92,6 +109,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     color: Colors.white,
                   ),
                   leadingOnnClick: () {
+                    Provider.of<BookingService>(context, listen: false)
+                        .isSigleMovie = false;
                     navigateToMyTicketScreen();
                   },
                   titleWidget: Image.asset('assets/images/netflix.png'),

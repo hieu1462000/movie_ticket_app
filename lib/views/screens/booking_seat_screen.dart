@@ -126,7 +126,7 @@ class _BookingSeatScreenState extends State<BookingSeatScreen> {
                 Navigator.of(context).pushNamed('/snack');
               },
             ),
-            body: CustomScrollView(slivers: [
+            body: CustomScrollView(physics: BouncingScrollPhysics(), slivers: [
               AppBarWidget(
                 leadingWidget: Icon(
                   Icons.adaptive.arrow_back,

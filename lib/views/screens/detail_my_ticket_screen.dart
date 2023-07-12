@@ -24,6 +24,7 @@ class _DetailTicketScreenState extends State<DetailTicketScreen> {
         ? Scaffold(
             backgroundColor: Colors.black,
             body: CustomScrollView(
+              physics: BouncingScrollPhysics(),
               slivers: [
                 AppBarWidget(
                   leadingWidget: Icon(

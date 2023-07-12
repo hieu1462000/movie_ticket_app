@@ -20,8 +20,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController passwordController = TextEditingController();
 
   bool loading = false;
-  bool hidePassword = false;
-  bool hideConfirmedPassword = false;
+  bool hidePassword = true;
+  bool hideConfirmedPassword = true;
   bool showClearText = false;
   String error = "";
   String email = "";

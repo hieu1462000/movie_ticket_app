@@ -78,7 +78,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
     BookingService bookingService =
         Provider.of<BookingService>(context, listen: false);
     bookingService.isSendingSuccessful = false;
-    print(seatIndex[0]);
     showDialog(
         barrierDismissible: false,
         context: context,
@@ -124,6 +123,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                         bookingService.selectedSeatsIndex = [];
                         bookingService.selectedSnacks = "";
                         bookingService.listSelectedSnacks = [];
+                        Navigator.popUntil(context, ModalRoute.withName('/'));
                         Navigator.of(context).pushNamed('/ticket');
                       },
                       child: const Text("My ticket")),
@@ -145,7 +145,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
     return Scaffold(
         backgroundColor: Colors.black,
         drawer: DrawerWidget(),
-        body: CustomScrollView(slivers: [
+        body: CustomScrollView(physics: BouncingScrollPhysics(), slivers: [
           AppBarWidget(
             leadingWidget: Icon(
               Icons.adaptive.arrow_back,
@@ -153,6 +153,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
               color: Colors.white,
             ),
             leadingOnnClick: () {
+              movieService.selectedMovie = null;
+              movieService.selectedMovieId = "";
               bookingService.ticketPrice = 0;
               bookingService.bookingPrice = 0;
               bookingService.numberOfSeats = 0;
@@ -169,9 +171,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   "Payment",
                   style: TextStyle(color: Colors.white, fontSize: 14.sp),
                 ),
-                // const SizedBox(
-                //   height: 2,
-                // ),
               ],
             ),
             isCenter: false,

@@ -14,6 +14,8 @@ class BookingService extends ChangeNotifier {
   final ShowtimeRepository showtimeRepository = ShowtimeRepository();
   final TicketRepository ticketRepository = TicketRepository();
 
+  bool isSigleMovie = false;
+
   int ticketPrice = 0;
   int snackPrice = 0;
   int bookingPrice = 0;
