@@ -5,13 +5,13 @@ class MovieCard extends StatelessWidget {
   final String title;
   final String posterPath;
   final String ratedSymbol;
-  final void Function()? onTap;
+  final VoidCallback onTap;
   const MovieCard(
       {Key? key,
       required this.title,
       required this.posterPath,
       required this.ratedSymbol,
-      this.onTap})
+      required this.onTap})
       : super(key: key);
 
   @override

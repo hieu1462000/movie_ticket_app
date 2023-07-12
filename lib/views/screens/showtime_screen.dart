@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movie_ticket/views/widgets/all_movie_showtime.dart';
-import 'package:movie_ticket/views/widgets/single_movie_showtime.dart';
+import 'package:movie_ticket/views/widgets/showtime_all_movie.dart';
+import 'package:movie_ticket/views/widgets/showtime_single_movie.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:intl/intl.dart';
@@ -46,7 +46,11 @@ class _ShowtimeScreenState extends State<ShowtimeScreen> {
               color: Colors.white,
             ),
             leadingOnnClick: () {
-              Navigator.of(context).pop();
+              if (currentMovie != null) {
+                Navigator.of(context).pop();
+              } else {
+                Navigator.popUntil(context, ModalRoute.withName('/'));
+              }
             },
             titleWidget: Text(
               currentMovie != null ? currentMovie.title : "Showtime",

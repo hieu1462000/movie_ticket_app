@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_ticket/models/list_movie_model.dart';
 import 'package:movie_ticket/models/movie_model.dart';
+import 'package:movie_ticket/models/repositories/advertisement_repository.dart';
 import 'package:movie_ticket/models/repositories/movie_repository.dart';
 
 import '../models/advertisement_model.dart';
@@ -18,6 +19,9 @@ class MovieService extends ChangeNotifier {
 
   final RecommendedRepository recommendedRepository = RecommendedRepository();
   List<RecommendedModel> listRecommended = [];
+
+  final AdvertisementRepository advertisementRepository =
+      AdvertisementRepository();
   List<AdvertisementModel> listAdvertisement = [];
   AdvertisementModel? selectedAd;
   String? selectedAdId;
@@ -43,26 +47,27 @@ class MovieService extends ChangeNotifier {
   Future<void> getDetailMovieFromApi(String? movieId) async {
     final movie = await movieRepository.getDetailMovie(movieId);
     selectedMovie = movie;
+    if (movieId != null) {
+      selectedMovieId = movieId;
+    }
     notifyListeners();
   }
 
   void getListRecommendedFromApi() async {
     final list = await recommendedRepository.getListRecommended();
-
     listRecommended = list;
     notifyListeners();
   }
 
   void getListAdvertisementFromApi() async {
-    ;
-    final list = await recommendedRepository.getListAdvertisement();
+    final list = await advertisementRepository.getListAdvertisement();
     listAdvertisement = list;
     notifyListeners();
   }
 
   void getDetailAdvertisementFromApi(String? advertisementId) async {
     final ad =
-        await recommendedRepository.getDetailAdvertisement(advertisementId);
+        await advertisementRepository.getDetailAdvertisement(advertisementId);
     selectedAd = ad;
     notifyListeners();
   }

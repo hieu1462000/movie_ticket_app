@@ -107,8 +107,9 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                   fontWeight: FontWeight.bold,
                 )),
             onTap: () {
-              Navigator.of(context).pop();
-              Navigator.of(context).pushNamed('/');
+              movieService.selectedMovie = null;
+              movieService.selectedMovieId = "";
+              Navigator.popUntil(context, ModalRoute.withName('/'));
             },
           ),
           Divider(
@@ -126,6 +127,8 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                   fontWeight: FontWeight.bold,
                 )),
             onTap: () {
+              movieService.selectedMovie = null;
+              movieService.selectedMovieId = "";
               Navigator.of(context).pop();
               toTicketScreen();
             },
@@ -145,6 +148,8 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                   fontWeight: FontWeight.bold,
                 )),
             onTap: () {
+              movieService.selectedMovie = null;
+              movieService.selectedMovieId = "";
               FirebaseAuth.instance.signOut();
             },
           ),
